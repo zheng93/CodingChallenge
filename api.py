@@ -49,10 +49,10 @@ class Locations(Resource):
         location = request.args.get('location')
         filename = location + ".TXT"
 
-        # check if the provided key is valid
+        # check if the provided key is valid. Return error message for invalid requests
         valid_keys = get_valid_keys(source_data_url)
         if filename not in valid_keys:
-            raise Exception("Invalid location key. Please double check.")
+            return "Invalid location key! Bad request!", 400
 
         # query weather data from our data source
         url = source_data_url + location + ".TXT"
